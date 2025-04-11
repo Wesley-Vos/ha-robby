@@ -82,9 +82,9 @@ class RobbyLawnMowerEntity(LawnMowerEntity):
 
     async def async_update(self):
         """Update the state of the lawn mower based on power consumption."""
-        self.async_update_power()
-        self.async_update_switch()
-        self.async_update_stuck()
+        await self.async_update_power()
+        await self.async_update_switch()
+        await self.async_update_stuck()
 
     @property
     def activity(self) -> LawnMowerActivity:
