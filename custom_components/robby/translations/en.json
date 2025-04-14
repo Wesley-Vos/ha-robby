@@ -11,17 +11,6 @@
                     "username": "Username"
                 }
             }
-        },
-        "entity": {
-            "lawn_mower": {
-                "activity": {
-                    "state": {
-                        "charging": "Charging",
-                        "docked": "Docked",
-                        "error": "Error"
-                    }
-                }
-            }
         }
     }
 }

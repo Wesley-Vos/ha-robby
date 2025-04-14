@@ -12,16 +12,5 @@
                 }
             }
         }
-    },
-    "entity": {
-        "lawn_mower": {
-            "activity": {
-                "state": {
-                    "charging": "Opladen",
-                    "docked": "Docked",
-                    "error": "Probleem"
-                }
-            }
-        }
     }
 }
