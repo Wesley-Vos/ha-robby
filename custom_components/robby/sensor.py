@@ -87,9 +87,11 @@ class RobbyActivitySensorEntity(SensorEntity):
     @property
     def native_value(self) -> str:
         """Return the current activity of the sensor."""
-        if self._power_val <= 0 or self._stuck_state:
+        if self._power_val <= 0:
             return LawnMowerActivity.ERROR
         if self._power_val < 2:
+            if self._stuck_state:
+                return LawnMowerActivity.ERROR
             return LawnMowerActivity.MOWING
         if 2 <= self._power_val < 3:
             return LawnMowerActivity.DOCKED
