@@ -16,7 +16,10 @@
             "sensor": {
                 "activity": {
                     "state": {
-                        "charging": "Charging"
+                        "charging": "Charging",
+                        "mowing": "Mowing",
+                        "docked": "Docked",
+                        "error": "Error"
                     }
                 }
             }

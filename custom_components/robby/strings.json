@@ -18,10 +18,9 @@
       "activity": {
         "state": {
           "charging": "Charging",
-          "mowing": "[%key:component::lawn_mower::entity_component::_::state::mowing%]",
-          "docked": "[%key:component::lawn_mower::entity_component::_::state::docked%]",
-          "idle": "[%key:component::lawn_mower::entity_component::_::state::idle%]",
-          "error": "[%key:component::lawn_mower::entity_component::_::state::error%]"
+          "mowing": "Mowing",
+          "docked": "Docked",
+          "error": "Error"
         }
       }
     }
