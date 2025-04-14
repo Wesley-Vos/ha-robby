@@ -6,3 +6,5 @@ DOMAIN = "robby"
 
 CONF_POWER_SENSOR = "power_sensor"
 CONF_SWITCH_SENSOR = "switch_sensor"
+
+STATE_CHARGING = "charging"

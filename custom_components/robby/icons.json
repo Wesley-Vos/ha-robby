@@ -1,12 +1,23 @@
 {
     "entity": {
-      "sensor": {
+        "lawn_mower": {
+            "activity": {
+            "default": "mdi:robot-mower",
+            "state": {
+                "charging": "mdi:battery-charging",
+                "mowing": "mdi:robot-mower",
+                "docked": "mdi:garage",
+                "error": "mdi:alert-circle"
+            }
+            }
+        },
+        "sensor": {
         "activity": {
           "default": "mdi:robot-mower",
           "state": {
             "charging": "mdi:battery-charging",
             "mowing": "mdi:robot-mower",
-            "docked": "mdi:robot-mower",
+            "docked": "mdi:garage",
             "error": "mdi:alert-circle"
           }
         }
