@@ -10,7 +10,6 @@ from homeassistant.core import HomeAssistant
 
 _PLATFORMS: list[Platform] = [
     Platform.BINARY_SENSOR,
-    Platform.SENSOR,
     Platform.LAWN_MOWER,
     Platform.SWITCH,
 ]

@@ -19,7 +19,7 @@
                 "state": {
                     "charging": "Opladen",
                     "mowing": "Maaien",
-                    "docked": "Gedokt",
+                    "docked": "Docked",
                     "error": "Probleem"
                 }
             }
@@ -29,7 +29,7 @@
                 "state": {
                     "charging": "Opladen",
                     "mowing": "Maaien",
-                    "docked": "Gedokt",
+                    "docked": "Docked",
                     "error": "Probleem"
                 }
             }
