@@ -11,13 +11,13 @@
                     "username": "Username"
                 }
             }
-        },
-        "entity": {
-            "sensor": {
-                "activity": {
-                    "state": {
-                        "charging": "Charging"
-                    }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "activity": {
+                "state": {
+                    "charging": "Opladen"
                 }
             }
         }
