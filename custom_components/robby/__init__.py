@@ -8,7 +8,11 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 
-_PLATFORMS: list[Platform] = [Platform.LAWN_MOWER, Platform.SWITCH]
+_PLATFORMS: list[Platform] = [
+    Platform.BINARY_SENSOR,
+    Platform.LAWN_MOWER,
+    Platform.SWITCH,
+]
 
 type RobbyConfigEntry = ConfigEntry[RobbyData]  # noqa: F821
 
