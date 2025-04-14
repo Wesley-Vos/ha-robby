@@ -17,17 +17,6 @@
                 "activity": {
                     "state": {
                         "charging": "Charging",
-                        "mowing": "Mowing",
-                        "docked": "Docked",
-                        "error": "Error"
-                    }
-                }
-            },
-            "sensor": {
-                "activity": {
-                    "state": {
-                        "charging": "Charging",
-                        "mowing": "Mowing",
                         "docked": "Docked",
                         "error": "Error"
                     }

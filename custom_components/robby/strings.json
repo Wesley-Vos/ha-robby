@@ -18,17 +18,7 @@
       "activity": {
         "state": {
           "charging": "Charging",
-          "mowing": "Mowing",
-          "docked": "Docked",
-          "error": "Error"
-        }
-      }
-    },
-    "sensor": {
-      "activity": {
-        "state": {
-          "charging": "Charging",
-          "mowing": "Mowing",
+          "mowing": "[%key:component::lawn_mower::entity_component::_::state::mowing%]",
           "docked": "Docked",
           "error": "Error"
         }
