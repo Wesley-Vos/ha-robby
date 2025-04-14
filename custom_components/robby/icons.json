@@ -1,0 +1,15 @@
+{
+    "entity": {
+      "sensor": {
+        "activity": {
+          "default": "mdi:robot-mower",
+          "state": {
+            "charging": "mdi:battery-charging",
+            "mowing": "mdi:robot-mower",
+            "docked": "mdi:robot-mower",
+            "error": "mdi:alert-circle"
+          }
+        }
+      }
+    }
+  }
