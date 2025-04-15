@@ -12,5 +12,14 @@
                 }
             }
         }
+    },
+    "entity": {
+        "lawn_mower":  {
+            "activity": {
+                "state": {
+                    "charging": "Charging"
+                }
+            }
+        }
     }
 }
