@@ -12,6 +12,7 @@ from homeassistant.helpers.event import async_track_state_change_event
 
 from . import RobbyConfigEntry
 from .const import ATTR_CHARGING, CONF_POWER_SENSOR, CONF_SWITCH_SENSOR, STATE_CHARGING
+from .device_binding import get_device_info
 
 
 async def async_setup_entry(
@@ -44,6 +45,7 @@ class RobbyLawnMowerEntity(LawnMowerEntity):
         self._stuck_available = False
         self._attr_supported_features = LawnMowerEntityFeature.PAUSE
         self._attr_translation_key = "activity"
+        self.device_info = get_device_info(hass, entry)
 
         async_track_state_change_event(
             hass,

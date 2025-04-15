@@ -132,8 +132,12 @@ async def async_setup_entry(hass: HomeAssistant, entry: RobbyConfigEntry) -> boo
     ) -> None:
         """Process state change event."""
         data = event.data
-        old_state = data.get("old_state").state
-        new_state = data.get("new_state").state
+        old_state = (
+            data.get("old_state").state if data.get("old_state") is not None else None
+        )
+        new_state = (
+            data.get("new_state").state if data.get("new_state") is not None else None
+        )
 
         print("Transition from", old_state, "to", new_state)
 

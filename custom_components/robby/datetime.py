@@ -10,6 +10,7 @@ from homeassistant.helpers.restore_state import RestoreEntity
 
 from . import RobbyConfigEntry
 from .const import CONF_POWER_SENSOR, CONF_SWITCH_SENSOR
+from .device_binding import get_device_info
 
 ENTITIES: tuple[DateTimeEntityDescription, ...] = (
     DateTimeEntityDescription(
@@ -66,6 +67,7 @@ class RobbyDateTimeEntity(DateTimeEntity, RestoreEntity):
             f"{description.key}_{self._power_sensor}_{self._switch_entity}"
         )
         self._state: datetime | None = None
+        self.device_info = get_device_info(hass, entry)
 
     @property
     def native_value(self):

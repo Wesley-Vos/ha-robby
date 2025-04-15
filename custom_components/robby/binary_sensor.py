@@ -11,6 +11,7 @@ from homeassistant.helpers.event import async_track_state_change_event
 
 from . import RobbyConfigEntry
 from .const import CONF_POWER_SENSOR, CONF_SWITCH_SENSOR
+from .device_binding import get_device_info
 
 
 async def async_setup_entry(
@@ -41,6 +42,7 @@ class RobbyChargingBinarySensorEntity(BinarySensorEntity):
         self._power_available = False
         self._switch_available = False
         self._attr_device_class = BinarySensorDeviceClass.BATTERY_CHARGING
+        self.device_info = get_device_info(hass, entry)
 
         async_track_state_change_event(
             hass,

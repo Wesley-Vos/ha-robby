@@ -1,4 +1,4 @@
-"""Robby Lawn Mower Entity for Home Assistant."""
+"""Robby switch Entity for Home Assistant."""
 
 from homeassistant.components.switch import SwitchEntity
 from homeassistant.const import STATE_OFF, STATE_ON
@@ -8,6 +8,7 @@ from homeassistant.helpers.restore_state import RestoreEntity
 
 from . import RobbyConfigEntry
 from .const import CONF_POWER_SENSOR, CONF_SWITCH_SENSOR
+from .device_binding import get_device_info
 
 
 async def async_setup_entry(
@@ -34,6 +35,7 @@ class RobbyStuckSwitchEntity(SwitchEntity, RestoreEntity):
             f"robby_stuck_switch_{self._power_sensor}_{self._switch_entity}"
         )
         self._state = None
+        self.device_info = get_device_info(hass, entry)
 
     @property
     def state(self):
