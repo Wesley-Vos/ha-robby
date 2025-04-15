@@ -1,9 +1,8 @@
-from config.custom_components.robby import RobbyConfigEntry
-from config.custom_components.robby.const import CONF_POWER_SENSOR
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.device_registry import DeviceInfo
 
-from .const import DOMAIN
+from . import RobbyConfigEntry
+from .const import CONF_POWER_SENSOR, DOMAIN
 
 
 def get_device_info(hass: HomeAssistant, entry: RobbyConfigEntry) -> DeviceInfo:
