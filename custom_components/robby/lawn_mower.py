@@ -5,7 +5,7 @@ from homeassistant.components.lawn_mower import (
     LawnMowerEntity,
     LawnMowerEntityFeature,
 )
-from homeassistant.const import STATE_ON
+from homeassistant.const import STATE_OFF, STATE_ON
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.event import async_track_state_change_event
@@ -92,6 +92,8 @@ class RobbyLawnMowerEntity(LawnMowerEntity):
     @property
     def activity(self) -> LawnMowerActivity:
         """Return the current activity of the lawn mower."""
+        if self._switch_state == STATE_OFF:
+            return LawnMowerActivity.ERROR
         if self._power_val <= 0:
             return LawnMowerActivity.ERROR
         if self._power_val < 2:
@@ -109,7 +111,6 @@ class RobbyLawnMowerEntity(LawnMowerEntity):
             self._power_available
             and self._switch_available
             and self._stuck_available
-            and self._switch_state == STATE_ON
         )
 
     @property
