@@ -4,7 +4,7 @@ from homeassistant.components.binary_sensor import (
     BinarySensorDeviceClass,
     BinarySensorEntity,
 )
-from homeassistant.const import STATE_ON
+from homeassistant.const import STATE_ON, STATE_UNAVAILABLE
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.event import async_track_state_change_event
@@ -58,7 +58,7 @@ class RobbyChargingBinarySensorEntity(BinarySensorEntity):
         if (power_state := self.hass.states.get(self._power_sensor)) is None:
             self._power_available = False
             return
-        self._power_available = True
+        self._power_available = power_state.state != STATE_UNAVAILABLE
         try:
             self._power_val = float(power_state.state)
         except (ValueError, TypeError, AttributeError):
@@ -69,8 +69,8 @@ class RobbyChargingBinarySensorEntity(BinarySensorEntity):
         if (switch_state := self.hass.states.get(self._switch_entity)) is None:
             self._switch_available = False
             return
-        self._switch_available = True
-        self._switch_state = switch_state.state
+        self._switch_available = switch_state.state != STATE_UNAVAILABLE
+        self._switch_state = switch_state.state == STATE_ON
 
     async def async_update(self):
         """Update the state of the binary sensor based on power consumption."""
@@ -80,7 +80,7 @@ class RobbyChargingBinarySensorEntity(BinarySensorEntity):
     @property
     def is_on(self) -> bool | None:
         """Return the current state of the binary sensor."""
-        return self._power_val >= 3
+        return self._switch_state and self._power_val >= 3
 
     @property
     def available(self) -> bool:
@@ -88,5 +88,4 @@ class RobbyChargingBinarySensorEntity(BinarySensorEntity):
         return (
             self._power_available
             and self._switch_available
-            and self._switch_state == STATE_ON
         )

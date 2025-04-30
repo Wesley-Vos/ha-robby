@@ -5,7 +5,7 @@ from homeassistant.components.lawn_mower import (
     LawnMowerEntity,
     LawnMowerEntityFeature,
 )
-from homeassistant.const import STATE_OFF, STATE_ON
+from homeassistant.const import STATE_ON, STATE_UNAVAILABLE
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.event import async_track_state_change_event
@@ -61,7 +61,7 @@ class RobbyLawnMowerEntity(LawnMowerEntity):
         if (power_state := self.hass.states.get(self._power_sensor)) is None:
             self._power_available = False
             return
-        self._power_available = True
+        self._power_available = power_state.state != STATE_UNAVAILABLE
         try:
             self._power_val = float(power_state.state)
         except (ValueError, TypeError, AttributeError):
@@ -72,15 +72,15 @@ class RobbyLawnMowerEntity(LawnMowerEntity):
         if (switch_state := self.hass.states.get(self._switch_entity)) is None:
             self._switch_available = False
             return
-        self._switch_available = True
-        self._switch_state = switch_state.state
+        self._switch_available = switch_state.state != STATE_UNAVAILABLE
+        self._switch_state = switch_state.state == STATE_ON
 
     async def async_update_stuck(self):
         """Update the stuck state of the lawn mower."""
         if (robby_stuck_state := self.hass.states.get("switch.robby_stuck")) is None:
             self._stuck_available = False
             return
-        self._stuck_available = True
+        self._stuck_available = robby_stuck_state.state != STATE_UNAVAILABLE
         self._stuck_state = robby_stuck_state.state == STATE_ON
 
     async def async_update(self):
@@ -92,7 +92,7 @@ class RobbyLawnMowerEntity(LawnMowerEntity):
     @property
     def activity(self) -> LawnMowerActivity:
         """Return the current activity of the lawn mower."""
-        if self._switch_state == STATE_OFF:
+        if not self._switch_state:
             return LawnMowerActivity.ERROR
         if self._power_val <= 0:
             return LawnMowerActivity.ERROR
