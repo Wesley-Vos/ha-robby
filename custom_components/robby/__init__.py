@@ -39,27 +39,19 @@ async def async_setup_entry(hass: HomeAssistant, entry: RobbyConfigEntry) -> boo
 
     """Actions"""
 
-    # def is_mowing() -> bool:
-    #     """Check if the Robby is mowing according to dts."""
-    #     start_dt = parse_datetime(
-    #         hass.states.get(_ROBBY_START_MOWING_CYCLE_ENTITY_ID).state
-    #     )
-    #     stop_dt = parse_datetime(
-    #         hass.states.get(_ROBBY_STOP_MOWING_CYCLE_ENTITY_ID).state
-    #     )
+    def is_mowing() -> bool:
+        """Check if the Robby is mowing according to dts."""
+        start_dt = parse_datetime(hass.states.get(_ROBBY_START_MOWING_CYCLE_ENTITY_ID).state)
+        stop_dt = parse_datetime(hass.states.get(_ROBBY_STOP_MOWING_CYCLE_ENTITY_ID).state)
 
-    #     return start_dt > stop_dt
+        return start_dt > stop_dt
 
-    # def is_charging() -> bool:
-    #     """Check if the Robby is charging according to dts."""
-    #     start_dt = parse_datetime(
-    #         hass.states.get(_ROBBY_START_CHARGING_CYCLE_ENTITY_ID).state
-    #     )
-    #     stop_dt = parse_datetime(
-    #         hass.states.get(_ROBBY_STOP_CHARGING_CYCLE_ENTITY_ID).state
-    #     )
+    def is_charging() -> bool:
+        """Check if the Robby is charging according to dts."""
+        start_dt = parse_datetime(hass.states.get(_ROBBY_START_CHARGING_CYCLE_ENTITY_ID).state)
+        stop_dt = parse_datetime(hass.states.get(_ROBBY_STOP_CHARGING_CYCLE_ENTITY_ID).state)
 
-    #     return start_dt > stop_dt
+        return start_dt > stop_dt
 
     async def start_charging() -> None:
         """Start charging the Robby."""
@@ -169,13 +161,16 @@ async def async_setup_entry(hass: HomeAssistant, entry: RobbyConfigEntry) -> boo
         elif old_state in (LawnMowerActivity.MOWING, LawnMowerActivity.ERROR):
             if new_state == LawnMowerActivity.DOCKED:
                 print("Finished mowing and returned to dock without charging")
-                await stop_mowing()
+                if is_mowing():
+                      await stop_mowing()
                 await released()
             elif new_state == STATE_CHARGING:
                 print("Finished mowing, returned to dock and started charging")
-                await stop_mowing()
+                if is_mowing():
+                    await stop_mowing()
                 await released()
-                await start_charging()
+                if is_charging():
+                    await start_charging()
 
     entry.async_on_unload(
         async_track_state_change_event(
