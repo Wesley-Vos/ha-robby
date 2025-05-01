@@ -12,7 +12,7 @@ from homeassistant.const import (
 )
 from homeassistant.core import Event, EventStateChangedData, HomeAssistant, ServiceCall
 from homeassistant.helpers.event import async_track_state_change_event
-from homeassistant.util.dt import now
+from homeassistant.util.dt import now, parse_datetime
 
 from .const import STATE_CHARGING
 
