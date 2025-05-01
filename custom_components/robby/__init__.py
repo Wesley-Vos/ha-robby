@@ -169,7 +169,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: RobbyConfigEntry) -> boo
                 if is_mowing():
                     await stop_mowing()
                 await released()
-                if is_charging():
+                if not is_charging():
                     await start_charging()
 
     entry.async_on_unload(
