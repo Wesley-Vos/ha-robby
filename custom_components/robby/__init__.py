@@ -42,14 +42,14 @@ async def async_setup_entry(hass: HomeAssistant, entry: RobbyConfigEntry) -> boo
     def is_mowing() -> bool:
         """Check if the Robby is mowing according to dts."""
         start_dt = parse_datetime(hass.states.get(_ROBBY_START_MOWING_CYCLE_ENTITY_ID).state)
-        stop_dt = parse_datetime(hass.states.get(_ROBBY_STOP_MOWING_CYCLE_ENTITY_ID).state)
+        stop_dt = parse_datetime(hass.states.get(_ROBBY_END_MOWING_CYCLE_ENTITY_ID).state)
 
         return start_dt > stop_dt
 
     def is_charging() -> bool:
         """Check if the Robby is charging according to dts."""
         start_dt = parse_datetime(hass.states.get(_ROBBY_START_CHARGING_CYCLE_ENTITY_ID).state)
-        stop_dt = parse_datetime(hass.states.get(_ROBBY_STOP_CHARGING_CYCLE_ENTITY_ID).state)
+        stop_dt = parse_datetime(hass.states.get(_ROBBY_END_CHARGING_CYCLE_ENTITY_ID).state)
 
         return start_dt > stop_dt
 
